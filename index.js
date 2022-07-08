@@ -1,8 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv')
+dotenv.config()
 var https = require('https');
 var http = require('http');
-dotenv.config()
+var fs = require('fs');
 const app = express();
 
 app.get('/colors', (req, res, next) => {
