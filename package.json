@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "devStart": "nodemon app.js"
+    "devStart": "nodemon index.js",
+    "prodStart": "pm2 start index.js -n api"
   },
   "author": "",
   "license": "ISC",

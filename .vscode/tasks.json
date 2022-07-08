@@ -202,8 +202,8 @@
             }
         },
         {
-            "label": "20. Start NODE Server on Linode",
-            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && npm run devStart'",
+            "label": "20. Install PM2 on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'npm install -g pm2'",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -212,7 +212,27 @@
             }
         },
         {
-            "label": "21. Update NODE Server on Linode",
+            "label": "21. Configure PM2 automatic startup on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'pm2 startup ubuntu'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "22. Start NODE Server on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && npm run prodStart'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "23. Update NODE Server on Linode",
             "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && git fetch ${input:githubrepo} && git pull ${input:githubrepo}'",
             "args": [],
             "type": "shell",
@@ -220,7 +240,7 @@
             "group": {
                 "kind": "build"
             }
-        }
+        },
     ],
     "inputs": [
         {
@@ -246,6 +266,18 @@
             "id": "nodemainfilename",
             "description": "What is the main file to be run?",
             "default":"index.js"
+        },
+        {
+            "type": "promptString",
+            "id": "serverprocessid",
+            "description": "What is the server process id?",
+            "default":""
+        },
+        {
+            "type": "promptString",
+            "id": "serverport",
+            "description": "What is the server port?",
+            "default":"80"
         },
     ]
 }
