@@ -210,6 +210,16 @@
             "group": {
                 "kind": "build"
             }
+        },
+        {
+            "label": "21. Update NODE Server on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && git fetch ${input:githubrepo} && git pull ${input:githubrepo}'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
         }
     ],
     "inputs": [
