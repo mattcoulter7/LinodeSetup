@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "Start NODE on localhost",
-            "command":  "node index.js",
+            "command":  "npm run devStart",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -203,7 +203,7 @@
         },
         {
             "label": "20. Start NODE Server on Linode",
-            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && node ${input:nodemainfilename}'",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && npm run devStart'",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
