@@ -1,5 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv')
+var https = require('https');
+var http = require('http');
 dotenv.config()
 const app = express();
 
@@ -36,5 +38,7 @@ app.get('/colors',(req, res, next) => {
     ])
 })
 
-const PORT = process.env.PORT || 5001
-app.listen(PORT,() => console.log(`Server is running on this port ${PORT}`))
+//const PORT = process.env.PORT || 5001
+//app.listen(PORT,() => console.log(`Server is running on this port ${PORT}`))
+http.createServer(app).listen(80);
+https.createServer(options, app).listen(443);

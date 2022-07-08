@@ -33,7 +33,7 @@
         },
         {
             "label": "1. Connect to Linode",
-            "command":  "ssh root@172.105.170.174",
+            "command":  "ssh root@${input:linodesshipaddress}",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -43,7 +43,7 @@
         },
         {
             "label": "2. Update Linode Ubuntu Packages",
-            "command":  "ssh root@172.105.170.174 apt-get update",
+            "command":  "ssh root@${input:linodesshipaddress} apt-get update",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -53,7 +53,7 @@
         },
         {
             "label": "3. Upgrade Linode Ubuntu Packages",
-            "command":  "ssh root@172.105.170.174 apt-get upgrade",
+            "command":  "ssh root@${input:linodesshipaddress} apt-get upgrade",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -63,7 +63,7 @@
         },
         {
             "label": "4. Check Linode NPM version",
-            "command":  "ssh root@172.105.170.174 npm -v",
+            "command":  "ssh root@${input:linodesshipaddress} npm -v",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -73,7 +73,7 @@
         },
         {
             "label": "5. Check Linode NODE version",
-            "command":  "ssh root@172.105.170.174 node -v",
+            "command":  "ssh root@${input:linodesshipaddress} node -v",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -83,7 +83,7 @@
         },
         {
             "label": "6. Install NPM on Linode",
-            "command":  "ssh root@172.105.170.174 apt-get install npm",
+            "command":  "ssh root@${input:linodesshipaddress} apt-get install npm",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -93,7 +93,7 @@
         },
         {
             "label": "7. Install NODE on Linode",
-            "command":  "ssh root@172.105.170.174 npm i -g n",
+            "command":  "ssh root@${input:linodesshipaddress} npm i -g n",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -103,7 +103,7 @@
         },
         {
             "label": "8. Install NVM (Node Version Manager) on Linode",
-            "command":  "ssh root@172.105.170.174 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash",
+            "command":  "ssh root@${input:linodesshipaddress} 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh && '",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -113,7 +113,7 @@
         },
         {
             "label": "9. Install Node LTS (Latest Stable) on Linode",
-            "command":  "ssh root@172.105.170.174 nvm install node",
+            "command":  "ssh root@${input:linodesshipaddress} 'nvm install node && nvm alias default node'",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -122,8 +122,88 @@
             }
         },
         {
-            "label": "10. Switch NODE Version to LTS (Latest Stable) on Linode",
-            "command":  "ssh root@172.105.170.174 nvm alias default node",
+            "label": "10. Generate SSH Key on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'ssh-keygen -t rsa && cat ~/.ssh/id_rsa.pub;'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "11. Add Linode SSH key to Github Repository",
+            "command":  "echo 'This step needs to be done manually...';echo '1. Login to Github';echo '2. Go to settings'; echo '3. On the left, Click on SSH and GPG keys'; echo '4. Click on New SSH key';echo '5. Paste the key copied from step 10'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "14. Clone Github Repository on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} git clone ${input:githubrepo}",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "15. Unclone Github Repository on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} rm -r ${input:githubreponame}/",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "16. Install Node Modules on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && npm install'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "17. Show NODE Project files on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && ls -a'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "18. Copy .env file to Linode",
+            "command":  "scp .env root@${input:linodesshipaddress}:~/${input:githubreponame}/",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "19. Edit .env file on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && nano .env'",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "20. Start NODE Server on Linode",
+            "command":  "ssh root@${input:linodesshipaddress} 'cd ${input:githubreponame}/ && node ${input:nodemainfilename}'",
             "args": [],
             "type": "shell",
             "problemMatcher": [],
@@ -131,5 +211,31 @@
                 "kind": "build"
             }
         }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "linodesshipaddress",
+            "description": "What is your Linode IP Address?",
+            "default":"172.105.170.174"
+        },
+        {
+            "type": "promptString",
+            "id": "githubrepo",
+            "description": "What is the Github SSH Clone url?",
+            "default":"git@github.com:mattcoulter7/LinodeSetup.git"
+        },
+        {
+            "type": "promptString",
+            "id": "githubreponame",
+            "description": "What is the Github Repository Name?",
+            "default":"LinodeSetup"
+        },
+        {
+            "type": "promptString",
+            "id": "nodemainfilename",
+            "description": "What is the main file to be run?",
+            "default":"index.js"
+        },
     ]
 }
