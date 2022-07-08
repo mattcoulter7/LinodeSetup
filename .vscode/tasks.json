@@ -1,0 +1,135 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start NODE on localhost",
+            "command":  "node index.js",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "Install NODE Packages on localhost",
+            "command":  "npm install;",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "0. Generate SSH Key",
+            "command":  "ssh-keygen -b 4096;cat ~/.ssh/id_rsa.pub",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "1. Connect to Linode",
+            "command":  "ssh root@172.105.170.174",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "2. Update Linode Ubuntu Packages",
+            "command":  "ssh root@172.105.170.174 apt-get update",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "3. Upgrade Linode Ubuntu Packages",
+            "command":  "ssh root@172.105.170.174 apt-get upgrade",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "4. Check Linode NPM version",
+            "command":  "ssh root@172.105.170.174 npm -v",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "5. Check Linode NODE version",
+            "command":  "ssh root@172.105.170.174 node -v",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "6. Install NPM on Linode",
+            "command":  "ssh root@172.105.170.174 apt-get install npm",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "7. Install NODE on Linode",
+            "command":  "ssh root@172.105.170.174 npm i -g n",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "8. Install NVM (Node Version Manager) on Linode",
+            "command":  "ssh root@172.105.170.174 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "9. Install Node LTS (Latest Stable) on Linode",
+            "command":  "ssh root@172.105.170.174 nvm install node",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "10. Switch NODE Version to LTS (Latest Stable) on Linode",
+            "command":  "ssh root@172.105.170.174 nvm alias default node",
+            "args": [],
+            "type": "shell",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            }
+        }
+    ]
+}
